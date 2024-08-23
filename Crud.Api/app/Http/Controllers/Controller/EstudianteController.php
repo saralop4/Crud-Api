@@ -171,4 +171,63 @@ class EstudianteController extends Controller
 
     }
 
+    public function Patch(Request $request,$id)
+    {
+        $estudiante = Estudiante::find($id);
+
+        if (!$estudiante) {
+
+            $data = [
+
+                'mensaje' => 'El estudiante no existe',
+                "estado" => 404
+            ];
+
+            return response()->json($data, 404);
+        }
+
+
+        $validador = Validator::make($request->all(), [
+            'nombre' => 'max:255',
+            'correo' => 'email|unique:estudiantes',
+            'telefono' => 'digits:10',
+            'lenguaje' => '',
+        ]);
+
+        if ($validador->fails()) {
+            $data = [
+                'mensaje' => 'Error de validacion de los datos',
+                'errors' => $validador->errors(),
+                'estado' => 400,
+            ];
+            return response()->json($data, 400);
+        }
+
+        if($request->has('nombre')){
+            $estudiante->nombre = $request->nombre;
+        }
+
+        if($request->has('correo')){
+            $estudiante->correo = $request->correo;
+        }
+
+        if($request->has('telefono')){
+            $estudiante->telefono = $request->telefono;
+        }
+
+        if($request->has('lenguaje')){
+            $estudiante->lenguaje = $request->lenguaje;
+        }
+
+        $estudiante->save();
+
+        $data = [
+            'estudiante' => $estudiante,
+            'mensaje' => 'Estudiante actualizado correctamente',
+            'estado' => 200,
+        ];
+
+        return response()->json($data, 200);
+    }
+
 }
