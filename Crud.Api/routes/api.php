@@ -9,6 +9,8 @@ Route::post('/CreateEstudiante', [EstudianteController::class, 'Create']);
 Route::get('/GetEstudianteForId/{id}', [EstudianteController::class, 'GetForId']);
 Route::delete('/DeleteEstudianteForId/{id}', [EstudianteController::class, 'Delete']);
 Route::put('/UpdateEstudiante/{id}', [EstudianteController::class, 'Update']);
+Route::patch('/PatchEstudiante/{id}', [EstudianteController::class, 'Patch']);
+
 
 
 
