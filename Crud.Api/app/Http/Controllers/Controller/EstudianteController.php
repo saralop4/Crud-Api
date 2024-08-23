@@ -12,16 +12,21 @@ class EstudianteController extends Controller
     //metodos que van a ser accedidos o llamados desde routes/api.php
 
     public function Index(){
+        $estudiante = Estudiante::all();
 
-        return 'Obteniendo mensaje desde controlador';
+        $data = [
+            'estudiantes'=> $estudiante,
+            'estado'=>200
+        ];
+        return response()->json($data, 200);
     }
 
     public function Create(Request $request)
     {
         $validador = Validator::make($request->all(), [
-            'nombre' => 'required',
-            'correo' => 'required|email',
-            'telefono' => 'required',
+            'nombre' => 'required|max:255',
+            'correo' => 'required|email|unique:estudiantes',
+            'telefono' => 'required|digits:10',
             'lenguaje' => 'required',
         ]);
 
