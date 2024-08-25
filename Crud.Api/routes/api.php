@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Controller\EstudianteController;
+use App\Http\Controllers\EstudianteController;
 
 Route::get('/GetAllEstudiantes', [EstudianteController::class, 'GetAll']);
 Route::post('/CreateEstudiante', [EstudianteController::class, 'Create']);
@@ -11,7 +11,7 @@ Route::delete('/DeleteEstudianteForId/{id}', [EstudianteController::class, 'Dele
 Route::put('/UpdateEstudiante/{id}', [EstudianteController::class, 'Update']);
 Route::patch('/PatchEstudiante/{id}', [EstudianteController::class, 'Patch']);
 
-
+//Route::apiResource('Estudiante', EstudianteController::class);
 
 
 
