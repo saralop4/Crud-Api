@@ -92,8 +92,8 @@ class EstudianteController extends Controller
         try {
 
             $request->validate([
-                'nombre' => ['required|max:255', Rule::unique('estudiantes')->ignore($estudiante)], //esta linea permite actualizar el campo con el mismo dato que ya tiene
-                'correo' => 'required|email|unique:estudiantes',
+                'nombre' => 'nullable|max:255|unique:estudiantes,nombre,' . $estudiante->id, //decirle a laravel que ignore el hecho que ya existe el mismo nombre que quiero actulizar
+                'correo' => 'nullable|email|unique:estudiantes,correo,' . $estudiante->id,
                 'telefono' => 'required|digits:10',
                 'lenguaje' => 'required',
             ]);
