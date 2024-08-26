@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Estudiante;
 use Illuminate\Validation\ValidationException;
 use Exception;
-use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
