@@ -2,7 +2,7 @@
 
 namespace App\Application\UseCases\Estudiante;
 
-use App\Application\Services\EstudianteServices;
+use App\Domain\Interfaces\EstudianteInterface;
 use App\Domain\Response\ApiResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
@@ -12,17 +12,16 @@ use Exception;
 
 class PatchEstudiante
 {
-    private $estudianteService;
+    private $estudianteInterface;
 
-    public function __construct(EstudianteServices $estudianteService)
+    public function __construct(EstudianteInterface $estudianteInterface)
     {
-        $this->estudianteService = $estudianteService;
+        $this->estudianteInterface = $estudianteInterface;
     }
-
     public function execute(array $data, $id)
     {
         try {
-            $estudiante = $this->estudianteService->getEstudianteById($id);
+            $estudiante = $this->estudianteInterface->findById($id);
 
             // Definir las claves permitidas
             $allowedKeys = ['nombre', 'correo', 'telefono', 'lenguaje'];

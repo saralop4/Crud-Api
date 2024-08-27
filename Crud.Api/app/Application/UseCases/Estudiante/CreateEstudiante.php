@@ -2,7 +2,8 @@
 
 namespace App\Application\UseCases\Estudiante;
 
-use App\Application\Services\EstudianteServices;
+
+use App\Domain\Interfaces\EstudianteInterface;
 use Illuminate\Validation\ValidationException;
 use App\Domain\Response\ApiResponse;
 
@@ -10,12 +11,11 @@ use App\Domain\Response\ApiResponse;
 
 class CreateEstudiante
 {
+    private $estudianteInterface;
 
-    private $estudianteService;
-
-    public function __construct(EstudianteServices $estudianteService)
+    public function __construct(EstudianteInterface $estudianteInterface)
     {
-        $this->estudianteService = $estudianteService;
+        $this->estudianteInterface = $estudianteInterface;
     }
 
     public function execute(array $data)
@@ -23,7 +23,7 @@ class CreateEstudiante
 
         try {
 
-            $estudiante = $this->estudianteService->createEstudiante($data);
+            $estudiante = $this->estudianteInterface->create($data);
             return ApiResponse::ResponseSuccess('Estudiante Guardado Exitosamente', 201, $estudiante);
 
         } catch (ValidationException $e) {

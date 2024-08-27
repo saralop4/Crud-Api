@@ -2,26 +2,26 @@
 
 namespace App\Application\UseCases\Estudiante;
 
-use App\Application\Services\EstudianteServices;
+use App\Domain\Interfaces\EstudianteInterface;
 use App\Domain\Response\ApiResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UpdateEstudiante
 {
-    private $estudianteService;
+    private $estudianteInterface;
 
-    public function __construct(EstudianteServices $estudianteService)
+    public function __construct(EstudianteInterface $estudianteInterface)
     {
-        $this->estudianteService = $estudianteService;
+        $this->estudianteInterface = $estudianteInterface;
     }
 
     public function execute(array $data, $id)
     {
         try {
-            $estudiante = $this->estudianteService->getEstudianteById($id);
+            $estudiante = $this->estudianteInterface->findById($id);
 
-            $this->estudianteService->updateEstudiante($estudiante, $data);
+            $this->estudianteInterface->update($estudiante, $data);
 
             return ApiResponse::ResponseSuccess('Estudiante Actualizado Exitosamente', 200, $estudiante);
         } catch (ModelNotFoundException $e) {
