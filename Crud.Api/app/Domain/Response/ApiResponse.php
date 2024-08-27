@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Response;
+namespace App\Domain\Response;
 
 class ApiResponse {
 
@@ -11,7 +11,7 @@ class ApiResponse {
             'data'=>$data,
             'message' => $message,
             'statusCode' => $statusCode,
-            'isSuccess'=>true]);
+            'isSuccess'=>true], $statusCode);
         }
 
     public static function ResponseError($message = 'Error', $statusCode, $data = [])
@@ -22,6 +22,6 @@ class ApiResponse {
             'message' => $message,
             'statusCode' => $statusCode,
             'isSuccess' => false
-        ]);
+        ],$statusCode);
     }
  }
