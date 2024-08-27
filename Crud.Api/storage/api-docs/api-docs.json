@@ -1,0 +1,228 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api Estudiante",
+        "description": "se implemento arquitectura limpia, principios solid y buenas practicas",
+        "contact": {
+            "email": "fullred@miapi.com"
+        },
+        "license": {
+            "name": "Proprietary",
+            "url": "http://www.fullred.com/licencia"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/GetAllEstudiantes": {
+            "get": {
+                "summary": "Obtener todos los estudiantes",
+                "operationId": "b3a150268a8a0f42330d969c95ec1e24",
+                "responses": {
+                    "200": {
+                        "description": "Lista de estudiantes"
+                    }
+                }
+            }
+        },
+        "/api/v1/CreateEstudiante": {
+            "post": {
+                "summary": "Crear un nuevo estudiante",
+                "operationId": "bdc5809bc932334cbf02d477cbc0a7c6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Juan Perez"
+                                    },
+                                    "correo": {
+                                        "type": "string",
+                                        "example": "juan.perez@example.com"
+                                    },
+                                    "telefono": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    },
+                                    "lenguaje": {
+                                        "type": "string",
+                                        "example": "Español"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Estudiante creado"
+                    },
+                    "400": {
+                        "description": "Datos inválidos"
+                    }
+                }
+            }
+        },
+        "/api/v1/GetEstudianteForId/{id}": {
+            "get": {
+                "summary": "Obtener un estudiante por ID",
+                "operationId": "2cccde03cb99fd859a1fb8148ad90ed0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles del estudiante"
+                    },
+                    "404": {
+                        "description": "Estudiante no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/v1/DeleteEstudianteForId/{id}": {
+            "delete": {
+                "summary": "Eliminar un estudiante",
+                "operationId": "38e198b105bc17d53d4e490337007421",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Estudiante eliminado"
+                    },
+                    "404": {
+                        "description": "Estudiante no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/v1/UpdateEstudiante/{id}": {
+            "put": {
+                "summary": "Actualizar un estudiante",
+                "operationId": "ee11d28d4c251174d20c6957d24b6ac7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Juan Perez"
+                                    },
+                                    "correo": {
+                                        "type": "string",
+                                        "example": "juan.perez@example.com"
+                                    },
+                                    "telefono": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    },
+                                    "lenguaje": {
+                                        "type": "string",
+                                        "example": "Español"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Estudiante actualizado"
+                    },
+                    "400": {
+                        "description": "Datos inválidos"
+                    },
+                    "404": {
+                        "description": "Estudiante no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/v1/PatchEstudiante/{id}": {
+            "patch": {
+                "summary": "Actualizar parcialmente un estudiante",
+                "operationId": "dc19a1f7d5e2325ab5199350d08b8151",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Juan Perez"
+                                    },
+                                    "correo": {
+                                        "type": "string",
+                                        "example": "juan.perez@example.com"
+                                    },
+                                    "telefono": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    },
+                                    "lenguaje": {
+                                        "type": "string",
+                                        "example": "Español"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Estudiante actualizado parcialmente"
+                    },
+                    "400": {
+                        "description": "Datos inválidos"
+                    },
+                    "404": {
+                        "description": "Estudiante no encontrado"
+                    }
+                }
+            }
+        }
+    }
+}
