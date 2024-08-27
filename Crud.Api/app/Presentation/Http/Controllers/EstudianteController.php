@@ -2,44 +2,22 @@
 
 namespace App\Presentation\Http\Controllers;
 
-
-use App\Application\UseCases\Estudiante\CreateEstudiante;
-use App\Application\UseCases\Estudiante\DeleteEstudiante;
-use App\Application\UseCases\Estudiante\GetAllEstudiante;
-use App\Application\UseCases\Estudiante\GetEstudianteById;
-use App\Application\UseCases\Estudiante\PatchEstudiante;
-use App\Application\UseCases\Estudiante\UpdateEstudiante;
+use App\Application\Services\EstudianteServices;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class EstudianteController
 {
-    private $createEstudiante;
-    private $getAllEstudiante;
-    private $getEstudiante;
-    private $deleteEstudiante;
-    private $updateEstudiante;
-    private $patchEstudiante;
+    private $estudianteService;
 
-    public function __construct(
-        CreateEstudiante $createEstudiante,
-        GetAllEstudiante $getAllEstudiante,
-        GetEstudianteById $getEstudiante,
-        DeleteEstudiante $deleteEstudiante,
-        UpdateEstudiante $updateEstudiante,
-        PatchEstudiante $patchEstudiante
-    ) {
-        $this->createEstudiante = $createEstudiante;
-        $this->getAllEstudiante = $getAllEstudiante;
-        $this->getEstudiante = $getEstudiante;
-        $this->deleteEstudiante = $deleteEstudiante;
-        $this->updateEstudiante = $updateEstudiante;
-        $this->patchEstudiante = $patchEstudiante;
+
+    public function __construct(EstudianteServices $estudianteService) {
+        $this->estudianteService = $estudianteService;
     }
 
     public function GetAll()
     {
-       $response= $this->getAllEstudiante->execute();
+       $response= $this->estudianteService->getAllEstudiantes();
         return $response;
     }
 
@@ -52,21 +30,21 @@ class EstudianteController
             'lenguaje' => 'required',
         ]);
 
-        $response =  $this->createEstudiante->execute($request->all());;
+        $response =  $this->estudianteService->createEstudiante($request->all());;
         return $response;
     }
 
     public function GetForId($id)
     {
 
-       $response=  $this->getEstudiante->execute($id);
+       $response=  $this->estudianteService->getEstudianteById($id);
         return $response;
     }
 
     public function Delete($id)
     {
 
-       $response= $this->deleteEstudiante->execute($id);
+       $response= $this->estudianteService->deleteEstudiante($id);
         return $response;
     }
 
@@ -80,7 +58,7 @@ class EstudianteController
         ]);
 
 
-        $response= $this->updateEstudiante->execute($id, $validatedData);
+        $response= $this->estudianteService->updateEstudiante($id, $validatedData);
         return $response;
     }
 
@@ -93,7 +71,7 @@ class EstudianteController
             'lenguaje' => 'nullable|max:255',
         ]);
 
-        $response= $this->patchEstudiante->execute($validatedData, $id);
+        $response= $this->estudianteService->patchEstudiante($validatedData, $id);
         return $response;
     }
 }

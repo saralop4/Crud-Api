@@ -2,22 +2,22 @@
 
 namespace App\Application\UseCases\Estudiante;
 
-use App\Application\Services\EstudianteServices;
+use App\Domain\Interfaces\EstudianteInterface;
 use App\Domain\Response\ApiResponse;
 
 class GetAllEstudiante{
 
-    private $estudianteService;
+    private $estudianteInterface;
 
-    public function __construct(EstudianteServices $estudianteService)
+    public function __construct(EstudianteInterface $estudianteInterface)
     {
-        $this->estudianteService = $estudianteService;
+        $this->estudianteInterface = $estudianteInterface;
     }
 
     public function execute(){
         try{
 
-            $estudiante = $this->estudianteService->getAllEstudiantes();
+            $estudiante = $this->estudianteInterface->getAll();
             if (!$estudiante->isEmpty()) {
                 return ApiResponse::ResponseSuccess('Listado exitoso', 200, $estudiante);
             }

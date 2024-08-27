@@ -2,24 +2,24 @@
 
 namespace App\Application\UseCases\Estudiante;
 
-use App\Application\Services\EstudianteServices;
+use App\Domain\Interfaces\EstudianteInterface;
 use App\Domain\Response\ApiResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DeleteEstudiante
 {
-    private $estudianteService;
+    private $estudianteInterface;
 
-    public function __construct(EstudianteServices $estudianteService)
+    public function __construct(EstudianteInterface $estudianteInterface)
     {
-        $this->estudianteService = $estudianteService;
+        $this->estudianteInterface = $estudianteInterface;
     }
 
     public function execute($id)
     {
         try {
-            $estudiante = $this->estudianteService->getEstudianteById($id);
-            $this->estudianteService->deleteEstudiante($estudiante);
+            $estudiante = $this->estudianteInterface->findById($id);
+            $this->estudianteInterface->delete($estudiante);
 
             return ApiResponse::ResponseSuccess('Estudiante Eliminado Exitosamente', 200);
         } catch (ModelNotFoundException $e) {
