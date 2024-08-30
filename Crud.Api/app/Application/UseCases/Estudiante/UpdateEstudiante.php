@@ -21,7 +21,7 @@ class UpdateEstudiante
         try {
             $estudiante = $this->estudianteInterface->findById($id);
 
-            $this->estudianteInterface->update($estudiante, $data);
+            $this->estudianteInterface->update($data, $estudiante);
 
             return ApiResponse::ResponseSuccess('Estudiante Actualizado Exitosamente', 200, $estudiante);
         } catch (ModelNotFoundException $e) {

@@ -55,9 +55,9 @@ class EstudianteServices
         return $this->deleteEstudiante->execute($id);
     }
 
-    public function updateEstudiante($id, array $data)
+    public function updateEstudiante(array $data, $id)
     {
-        return $this->updateEstudiante->execute($id, $data);
+        return $this->updateEstudiante->execute($data, $id);
     }
 
     public function patchEstudiante(array $data, $id)

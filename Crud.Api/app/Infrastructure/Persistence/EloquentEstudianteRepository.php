@@ -22,7 +22,7 @@ class EloquentEstudianteRepository implements EstudianteInterface
         return Estudiante::create($data);
     }
 
-    public function update($id, array $data)
+    public function update(array $data,$id)
     {
         $id->update($data);
         return $id;
